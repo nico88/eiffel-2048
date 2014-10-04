@@ -136,14 +136,16 @@ feature -- Status report
 		end
 
 	out: STRING
+	-- provides a string representation of the board content.
 		local
 			i: INTEGER
 			j: INTEGER
 			output: STRING
 		do
-			output:=""
+
 			from
 				i:= 1
+				output:=""
 			until
 				i> rows
 			loop
@@ -161,6 +163,8 @@ feature -- Status report
 					i:=i+1
 			end
 			Result := output
+			ensure then
+				Result.count>0
 		end
 
 	is_full: BOOLEAN
@@ -170,6 +174,12 @@ feature -- Status report
 		ensure Result = (nr_of_filled_cells = 16)
 		end
 
+	is_empty:BOOLEAN
+		-- Indicates if all cells in the board are not set
+		do
+			Result := (nr_of_filled_cells = 0) -- Board is full when all 16 cells are filled
+		ensure Result = (nr_of_filled_cells = 0)
+		end
 	can_move_left: BOOLEAN
 		-- Indicates whether the board would change through a movement to the left
 		require
@@ -220,9 +230,11 @@ feature -- Status report
 				until
 					(j+1) > columns or move_ok
 				loop
-					if ((elements.item (i,j).value = elements.item (i,j+1).value) or (elements.item(i,j+1).value = 0)) then
+					if not (elements.item (i, j).value = 0) then
+						if ((elements.item (i,j).value = elements.item (i,j+1).value) or (elements.item(i,j+1).value = 0)) then
 						-- evaluates if the value is equal to the right or if value is equal 0
 						move_ok := True
+						end
 					end
 					j:= j+1
 				end
@@ -240,30 +252,28 @@ feature -- Status report
 			elements /= Void
 		local
 			i,j,k: INTEGER
-			can_move,cell_ocuped: BOOLEAN
+			can_move,cell_occupied: BOOLEAN
 		do
 			from
 				i := 1
 			until
-				i >= columns or can_move
+				i > columns or can_move
 			loop
-				cell_ocuped := false
+				cell_occupied := false
 				from
 					j := rows
-					k := rows - 1
 				until
-					k < 1 or can_move
+					j <= 1 or can_move
 				loop
-					if not cell_ocuped then
-						cell_ocuped := elements.item (j, i).value /= 0
+					if not cell_occupied then
+						cell_occupied := elements.item (j, i).value /= 0
 					end
-					if((elements.item (j, i).value /= 0 and elements.item (j, i).value = elements.item (k, i).value) or (cell_ocuped and elements.item(k, i).value = 0 ))
+					if((elements.item (j, i).value /= 0 and elements.item (j, i).value = elements.item (j-1, i).value) or (cell_occupied and elements.item(j-1, i).value = 0 ))
 					then
 						-- Two cells have the same value or the cell of up is a free cell
 						can_move := True
 					end
-					j := k
-					k := k-1
+					j := j-1
 				end
 				i := i+1
 			end
