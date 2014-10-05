@@ -142,10 +142,47 @@ feature -- Status report
 			j: INTEGER
 			output: STRING
 		do
-
+			output := "	<div id = 'board' class='game-container' style='margin-left: 430px;margin-top: -80px;'><div class='grid-container'>"
 			from
 				i:= 1
-				output:=""
+			until
+				i> rows
+			loop
+				output.append_string ("<div class='grid-row'>")
+				from
+					j:= 1
+				until
+					j>columns
+				loop
+					if elements.item (i, j).value /= 0 then
+						output.append_string ("<div class='grid-cell'><div class='tile-container'><div class='tile tile-" + elements.item (i, j).out  + " tile-position-1-1'><div class='tile-inner'>")
+						--output.append_string (elements.item (i, j).out)
+						output.append_string ("</div></div></div></div>")
+					else
+						output.append_string ("<div class='grid-cell'>")
+						--output.append_string (elements.item (i, j).out)
+						output.append_string ("</div>")
+					end
+					j:=j+1
+				end
+				output.append_string ("</div>")
+				i:=i+1
+			end
+			output.append_string ("</div></div>")
+			Result := output
+			ensure then
+				Result.count>0
+		end
+
+		out2: STRING
+		local
+			i: INTEGER
+			j: INTEGER
+			output: STRING
+		do
+			output:=""
+			from
+				i:= 1
 			until
 				i> rows
 			loop
@@ -163,8 +200,6 @@ feature -- Status report
 					i:=i+1
 			end
 			Result := output
-			ensure then
-				Result.count>0
 		end
 
 	is_full: BOOLEAN

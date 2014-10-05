@@ -215,9 +215,9 @@ feature {NONE} -- Execution
 				end
 				-- Save Game and Quit
 				if (attached req.string_item ("save_user") as save_user) and (attached req.string_item ("save_pass") as save_pass)then
-					user.set_nickname (save_user)
-					user.set_pass (save_pass)
-					user.save_game(controller.board)
+					--user.set_nickname (save_user)
+					--user.set_pass (save_pass)
+					user.save_game (controller.board)
 					Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
 							<h1>2048_evil</h1>
 							<form action="/" method="POST">
