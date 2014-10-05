@@ -25,7 +25,7 @@ feature -- Implementation
 
 	new_user : USER_2048
 
-	pantal: INTEGER
+	option_pantal: INTEGER
 
 	login (username: STRING; password: STRING)
 			-- validate the user datas
@@ -56,12 +56,12 @@ feature {NONE} -- Execution
 		do
 
 			create Result.make
-			if pantal = 0 then --Initial
+			if option_pantal = 0 then --Initial
 				if attached req.string_item ("login") as l_user then
-					pantal := 1
+					option_pantal := 1
 				else
 					if attached req.string_item ("register") as l_user then
-						pantal := 2
+						option_pantal := 2
 					else
 						--| Otherwise, ask for name
 						Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
@@ -74,7 +74,7 @@ feature {NONE} -- Execution
 					end
 				end
 			end
-			if pantal = 1 then -- Login
+			if option_pantal = 1 then -- Login
 				if (attached req.string_item ("nickname") as nick) and (attached req.string_item ("password") as pass) then
 					create controller.make
 					login (nick, pass)
@@ -96,7 +96,7 @@ feature {NONE} -- Execution
 					else
 						user.load_game
 						controller.make_with_board (user.game)
-						pantal := 3
+						option_pantal := 3
 					end
 				else
 					Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
@@ -112,14 +112,14 @@ feature {NONE} -- Execution
 					]" + "</div>")
 				end
 			end
-			if pantal = 2 then -- Register
+			if option_pantal = 2 then -- Register
 				if (attached req.string_item ("name") as name) and (attached req.string_item ("surname") as surname) and (attached req.string_item ("nickname") as nick) and (attached req.string_item ("password") as pass) then
 					create controller.make
 					create new_user.make_for_test
 					if new_user.is_valid_name (name) and new_user.is_valid_name (surname) and new_user.is_valid_name (nick) and new_user.is_valid_password (pass) then --validate the data
 						if not new_user.existing_file (nick) then
 							create user.make_new_user (name, surname, nick, pass)
-							pantal := 3
+							option_pantal := 3
 						else
 							Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
 						        <h1>2048_evil</h1>											
@@ -178,7 +178,7 @@ feature {NONE} -- Execution
 					]" + "</div>")
 				end
 			end
-			if pantal = 3 then --Play 2048 evil
+			if option_pantal = 3 then --Play 2048 evil
 			    Result.set_title ("2048_evil")
 			    -- Up
 				if attached req.string_item ("up") as l_up then
@@ -215,8 +215,6 @@ feature {NONE} -- Execution
 				end
 				-- Save Game and Quit
 				if (attached req.string_item ("save_user") as save_user) and (attached req.string_item ("save_pass") as save_pass)then
-					--user.set_nickname (save_user)
-					--user.set_pass (save_pass)
 					user.save_game (controller.board)
 					Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
 							<h1>2048_evil</h1>
@@ -230,10 +228,10 @@ feature {NONE} -- Execution
 				Result.add_javascript_url ("https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js")
 				Result.add_javascript_content (main_script)
 			end
-			if pantal = 4 then --Game Over
+			if option_pantal = 4 then --Game Over
 				Result.set_body (html_game_over)
 			end
-			if pantal = 5 then --Win Game
+			if option_pantal = 5 then --Win Game
 				Result.set_body (html_win_game)
 			end
 		end
