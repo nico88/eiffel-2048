@@ -64,6 +64,7 @@ feature {NONE} -- Execution
 						option_pantal := 2
 					else
 						--| Otherwise, ask for name
+						Result.set_body (html_game_over)
 						Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
 							<h1>2048_evil</h1>
 							<form action="/" method="POST">
@@ -325,27 +326,21 @@ feature {NONE} --Show board with html table
 			s.append ("<td ng-class='CellColor({{row.cell4}})'>{{row.cell4}}</td>")
 			s.append ("</tr>")
 			s.append ("</table>")
+			s.append ("<center>")
 			-- Up
 			s.append ("<br>")
 			s.append ("<form  action="+"/"+" method="+"POST"+">")
 			s.append ("<input type='submit' value='Up' name="+"up"+" style=width:100px;height:40px >")
-			s.append ("</form>")
 			-- Down
-			s.append ("<br>")
-			s.append ("<form  action="+"/"+" method="+"POST"+">")
 			s.append ("<input type='submit' value='Down' name="+"down"+" style=width:100px;height:40px >")
-			s.append ("</form>")
 			-- Left
-			s.append ("<br>")
-			s.append ("<form  action="+"/"+" method="+"POST"+">")
 			s.append ("<input type='submit' value='Left' name="+"left"+" style=width:100px;height:40px >")
-			s.append ("</form>")
 			-- Right
-			s.append ("<br>")
-			s.append ("<form  action="+"/"+" method="+"POST"+">")
 			s.append ("<input type='submit' value='Right' name="+"right"+" style=width:100px;height:40px >")
 			s.append ("</form>")
+			s.append ("</center>")
 			-- Load
+			s.append ("<center>")
 			s.append ("<br>")
 			s.append ("<form action="+"/"+" method="+"POST"+">")
 			s.append ("<input type="+"text"+" name="+"load_user"+" style="+"visibility:hidden"+" >")
@@ -359,6 +354,7 @@ feature {NONE} --Show board with html table
 			s.append ("<input type="+"password"+" name="+"save_pass"+" style="+"visibility:hidden"+" >")
 			s.append ("<input type="+"submit"+" value="+"Save and Quit"+" style="+"width:100px;height:40px"+">")
 			s.append ("</form>")
+			s.append ("</center>")
 			s.append ("</div>")
 			Result := s
 		end
