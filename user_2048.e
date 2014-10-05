@@ -175,12 +175,18 @@ feature -- Control methods
 		end
 	end
 
-feature{HAS_UNFINISHED_GAME_AT_USER_2048}
+feature {HAS_UNFINISHED_GAME_AT_USER_2048, APP_2048}
 
 	set_nickname(nick : STRING)
 		--
-	do
-		nickname:= nick
-	end
+		do
+			nickname:= nick
+		end
+
+	set_pass (pass: STRING)
+		--
+		do
+			password := pass
+		end
 
 end

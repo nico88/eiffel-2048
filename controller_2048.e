@@ -366,31 +366,6 @@ feature -- Movement commands
 
 feature {NONE} -- Auxiliary routines
 
-	set_random_free_cell
-		require
-			not board.is_full
-		local
-		    random_sequence : RANDOM
-			random_cell_row : INTEGER
-			random_cell_col : INTEGER
-		do
-			--initialize random seed
-		    create random_sequence.set_seed(get_random_seed)
-			random_cell_row := get_random(random_sequence, 4) + 1;
-			random_cell_col := get_random(random_sequence, 4) + 1;
-		    from
-		    until
-		    	board.elements.item(random_cell_row, random_cell_col).is_available = True
-		    loop
-		    	--generate a random position
-				random_cell_row := get_random(random_sequence, 4) + 1;
-				random_cell_col := get_random(random_sequence, 4) + 1;
-		    end
-			-- set at cell random number
-			board.set_cell(random_cell_row, random_cell_col, random_number_two_or_four(random_sequence))
-			coord_last_random_cell := [random_cell_row,random_cell_col]
-		end
-
 	position_right (row, val: INTEGER)
 			-- Method that receives as a parameter a row, and verifies the position which is more to the right
 			-- which is empty in that row and also inserts the value passed as parameter
@@ -985,6 +960,33 @@ feature {NONE} -- Auxiliary routines
 		        end
 		    end
 				--initialize random seed
-		end -- end do		
+		end -- end do	
+
+feature {SET_RANDOM_FREE_CELL_AT_CONTROLLER}
+
+	set_random_free_cell
+		require
+			not board.is_full
+		local
+		    random_sequence : RANDOM
+			random_cell_row : INTEGER
+			random_cell_col : INTEGER
+		do
+			--initialize random seed
+		    create random_sequence.set_seed(get_random_seed)
+			random_cell_row := get_random(random_sequence, 4) + 1;
+			random_cell_col := get_random(random_sequence, 4) + 1;
+		    from
+		    until
+		    	board.elements.item(random_cell_row, random_cell_col).is_available = True
+		    loop
+		    	--generate a random position
+				random_cell_row := get_random(random_sequence, 4) + 1;
+				random_cell_col := get_random(random_sequence, 4) + 1;
+		    end
+			-- set at cell random number
+			board.set_cell(random_cell_row, random_cell_col, random_number_two_or_four(random_sequence))
+			coord_last_random_cell := [random_cell_row,random_cell_col]
+		end
 
 end
