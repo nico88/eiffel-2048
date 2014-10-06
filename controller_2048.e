@@ -766,13 +766,13 @@ feature {NONE} -- Auxiliary routines
 			until
 				l < 1
 			loop
-				if board.elements.item (1, l).value /= 0 then
+				if board.elements.item (2, l).value /= 0 then
 					l := l - 1
 				else
 					if l < 4 then
-						elem_2 := board.elements.item (1, l + 1).value
+						elem_2 := board.elements.item (2, l + 1).value
 					else
-						elem_2 := board.elements.item (1, l).value
+						elem_2 := board.elements.item (2, l).value
 					end
 					col_2 := l
 					l := 0
@@ -783,13 +783,13 @@ feature {NONE} -- Auxiliary routines
 			until
 				n < 1
 			loop
-				if board.elements.item (1, n).value /= 0 then
+				if board.elements.item (3, n).value /= 0 then
 					n := n - 1
 				else
 					if n < 4 then
-						elem_3 := board.elements.item (1, n + 1).value
+						elem_3 := board.elements.item (3, n + 1).value
 					else
-						elem_3 := board.elements.item (1, n).value
+						elem_3 := board.elements.item (3, n).value
 					end
 					col_3 := n
 					n := 0
@@ -800,13 +800,13 @@ feature {NONE} -- Auxiliary routines
 			until
 				p < 1
 			loop
-				if board.elements.item (1, p).value /= 0 then
+				if board.elements.item (4, p).value /= 0 then
 					p := p - 1
 				else
 					if p < 4 then
-						elem_4 := board.elements.item (1, p + 1).value
+						elem_4 := board.elements.item (4, p + 1).value
 					else
-						elem_4 := board.elements.item (1, p).value
+						elem_4 := board.elements.item (4, p).value
 					end
 					col_4 := p
 					p := 0
@@ -870,16 +870,23 @@ feature {NONE} -- Auxiliary routines
 		local
 			random_sequence: RANDOM
 		do
-		    if board.elements.item (row-1, column).value = 2 then
-		        board.set_cell (row, column, 4)
-		    else
-		        if board.elements.item (row-1, column).value = 4 then
-		        	board.set_cell (row, column, 2)
-		        else
-					create random_sequence.set_seed (get_random_seed)
+			if row = 1 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+			    if board.elements.item (row-1, column).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+		    	    if board.elements.item (row-1, column).value = 4 then
+		        		board.set_cell (row, column, 2)
+		        	else
+						create random_sequence.set_seed (get_random_seed)
 					-- set at cell random number	
-					board.set_cell (row, column, random_number_two_or_four (random_sequence))
-					coord_last_random_cell := [row, column]
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+					end
 		        end
 		    end
 				--initialize random seed
@@ -890,39 +897,53 @@ feature {NONE} -- Auxiliary routines
 		local
 			random_sequence: RANDOM
 		do
-		    if board.elements.item (row+1, column).value = 2 then
-		        board.set_cell (row, column, 4)
-		    else
-		        if board.elements.item (row+1, column).value = 4 then
-		        	board.set_cell (row, column, 2)
-		        else
-					create random_sequence.set_seed (get_random_seed)
+			if row = 4 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+			    if board.elements.item (row+1, column).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+		    	    if board.elements.item (row+1, column).value = 4 then
+		        		board.set_cell (row, column, 2)
+		        	else
+						create random_sequence.set_seed (get_random_seed)
 					-- set at cell random number	
-					board.set_cell (row, column, random_number_two_or_four (random_sequence))
-					coord_last_random_cell := [row, column]
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+					end
 		        end
 		    end
 				--initialize random seed
-		end -- end do	
+		end -- end do
 
 	set_evil_position_left (row, column: INTEGER)
 
 		local
 			random_sequence: RANDOM
 		do
-		    if board.elements.item (row, column-1).value = 2 then
-		        board.set_cell (row, column, 4)
-		    else
-		        if board.elements.item (row, column-1).value = 4 then
-		        	board.set_cell (row, column, 2)
-		        else
-					create random_sequence.set_seed (get_random_seed)
-					-- set at cell random number	
-					board.set_cell (row, column, random_number_two_or_four (random_sequence))
-					coord_last_random_cell := [row, column]
-		        end
-		    end
-				--initialize random seed
+			if column = 1 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+		    	if board.elements.item (row, column-1).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+			        if board.elements.item (row, column-1).value = 4 then
+			        	board.set_cell (row, column, 2)
+			        else
+						create random_sequence.set_seed (get_random_seed)
+						-- set at cell random number	
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+			        end
+			    end
+					--initialize random seed
+			end
 		end -- end do
 
 	set_evil_position_right (row, column: INTEGER)
@@ -930,20 +951,27 @@ feature {NONE} -- Auxiliary routines
 		local
 			random_sequence: RANDOM
 		do
-		    if board.elements.item (row, column+1).value = 2 then
-		        board.set_cell (row, column, 4)
-		    else
-		        if board.elements.item (row, column+1).value = 4 then
-		        	board.set_cell (row, column, 2)
-		        else
-					create random_sequence.set_seed (get_random_seed)
-					-- set at cell random number	
-					board.set_cell (row, column, random_number_two_or_four (random_sequence))
-					coord_last_random_cell := [row, column]
-		        end
-		    end
-				--initialize random seed
-		end -- end do		
+			if column = 4 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+		    	if board.elements.item (row, column+1).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+			        if board.elements.item (row, column+1).value = 4 then
+			        	board.set_cell (row, column, 2)
+			        else
+						create random_sequence.set_seed (get_random_seed)
+						-- set at cell random number	
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+			        end
+			    end
+					--initialize random seed
+			end
+		end -- end do	
 
 feature {none}
 	set_random_free_cell
