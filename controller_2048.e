@@ -436,50 +436,50 @@ feature {NONE} -- Auxiliary routines
 			from
 				i := 1
 			until
-				i >= 4
+				i = 4
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					i := i + 1
 				else
+					if i > 1 then
+						col_i := board.elements.item (i-1, j).value
+					else
+						col_i := board.elements.item (i, j).value
+					end
 					from
 						k := 1
 					until
-						k >= 4
+						k = 4
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							k := k + 1
 						else
+							if k > 1 then
+								col_k := board.elements.item (k-1, l).value
+							else
+								col_k := board.elements.item (k, l).value
+							end
 							from
 								m := 1
 							until
-								m >= 4
+								m = 4
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									m := m + 1
 								else
+									if m > 1 then
+										col_m := board.elements.item (m-1, n).value
+									else
+										col_m := board.elements.item (m, n).value
+									end
 									from
 										p := 1
 									until
-										p >= 4
+										p = 4
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											p := p + 1
 										else
-											if i > 1 then
-												col_i := board.elements.item (i-1, j).value
-											else
-												col_i := board.elements.item (i, j).value
-											end
-											if k > 1 then
-												col_k := board.elements.item (k-1, l).value
-											else
-												col_k := board.elements.item (k, l).value
-											end
-											if m > 1 then
-												col_m := board.elements.item (m-1, n).value
-											else
-												col_m := board.elements.item (m, n).value
-											end
 											if p > 1 then
 												col_p := board.elements.item (p-1, o).value
 											else
@@ -488,31 +488,31 @@ feature {NONE} -- Auxiliary routines
 											mayor := is_mayor (col_i, col_k, col_m, col_p)
 											if mayor = 1 then
 												set_evil_position_up (i, j)
-												i := 5
-												k := 5
-												m := 5
-												p := 5
+												i := 4
+												k := 4
+												m := 4
+												p := 4
 											else
 												if mayor = 2 then
 													set_evil_position_up (k, l)
-													i := 5
-													k := 5
-													m := 5
-													p := 5
+													i := 4
+													k := 4
+													m := 4
+													p := 4
 												else
 													if mayor = 3 then
 														set_evil_position_up (m, n)
-														i := 5
-														k := 5
-														m := 5
-														p := 5
+														i := 4
+														k := 4
+														m := 4
+														p := 4
 													else
 														if mayor = 4 then
 															set_evil_position_up (p, o)
-															i := 5
-															k := 5
-															m := 5
-															p := 5
+															i := 4
+															k := 4
+															m := 4
+															p := 4
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
@@ -541,51 +541,51 @@ feature {NONE} -- Auxiliary routines
 			from
 				i := 4
 			until
-				i <= 1
+				i = 1
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					i := i - 1
 				else
+					if i < 1 then
+						col_i := board.elements.item (i+1, j).value
+					else
+						col_i := board.elements.item (i, j).value
+					end
 					from
 						k := 4
 					until
-						k <= 1
+						k = 1
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							k := k - 1
 						else
+							if k < 1 then
+								col_k := board.elements.item (k+1, l).value
+							else
+								col_k := board.elements.item (k, l).value
+							end
 							from
 								m := 4
 							until
-								m <= 1
+								m = 1
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									m := m - 1
 								else
+     								if m < 1 then
+										col_m := board.elements.item (m+1, n).value
+									else
+										col_m := board.elements.item (m, n).value
+									end
 									from
 										p := 4
 									until
-										p <= 1
+										p = 1
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											p := p - 1
 										else
-											if i < 4 then
-												col_i := board.elements.item (i+1, j).value
-											else
-												col_i := board.elements.item (i, j).value
-											end
-											if k < 4 then
-												col_k := board.elements.item (k+1, l).value
-											else
-												col_k := board.elements.item (k, l).value
-											end
-											if m < 4 then
-												col_m := board.elements.item (m+1, n).value
-											else
-												col_m := board.elements.item (m, n).value
-											end
-											if p < 4 then
+											if p < 1 then
 												col_p := board.elements.item (p+1, o).value
 											else
 												col_p := board.elements.item (p, o).value
@@ -593,31 +593,31 @@ feature {NONE} -- Auxiliary routines
 											mayor := is_mayor (col_i, col_k, col_m, col_p)
 											if mayor = 1 then
 												set_evil_position_down (i, j)
-												i := 0
-												k := 0
-												m := 0
-												p := 0
+												i := 1
+												k := 1
+												m := 1
+												p := 1
 											else
 												if mayor = 2 then
 													set_evil_position_down (k, l)
-													i := 0
-													k := 0
-													m := 0
-													p := 0
+													i := 1
+													k := 1
+													m := 1
+													p := 1
 												else
 													if mayor = 3 then
 														set_evil_position_down (m, n)
-														i := 0
-														k := 0
-														m := 0
-														p := 0
+														i := 1
+														k := 1
+														m := 1
+														p := 1
 													else
 														if mayor = 4 then
 															set_evil_position_down (p, o)
-															i := 0
-															k := 0
-															m := 0
-															p := 0
+															i := 1
+															k := 1
+															m := 1
+															p := 1
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
@@ -649,50 +649,50 @@ feature {NONE} -- Auxiliary routines
 			from
 				j := 1
 			until
-				j >= 4
+				j = 4
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					j := j + 1
 				else
+					if j > 4 then
+						row_j := board.elements.item (i, j-1).value
+					else
+						row_j := board.elements.item (i, j).value
+					end
 					from
 						l := 1
 					until
-						l >= 4
+						l = 4
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							l := l + 1
 						else
+							if l > 4 then
+								row_l := board.elements.item (k, l-1).value
+							else
+								row_l := board.elements.item (k, l).value
+							end
 							from
 								n := 1
 							until
-								n >= 4
+								n = 4
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									n := n + 1
 								else
+									if n > 4 then
+										row_n := board.elements.item (m, n-1).value
+									else
+										row_n := board.elements.item (m, n).value
+									end
 									from
 										o := 1
 									until
-										o >= 4
+										o = 4
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											o := o + 1
 										else
-											if j > 1 then
-												row_j := board.elements.item (i, j-1).value
-											else
-												row_j := board.elements.item (i, j).value
-											end
-											if l > 1 then
-												row_l := board.elements.item (k, l-1).value
-											else
-												row_l := board.elements.item (k, l).value
-											end
-											if n > 1 then
-												row_n := board.elements.item (m, n-1).value
-											else
-												row_n := board.elements.item (m, n).value
-											end
 											if o > 1 then
 												row_o := board.elements.item (p, o-1).value
 											else
@@ -701,31 +701,31 @@ feature {NONE} -- Auxiliary routines
 											mayor := is_mayor (row_j, row_l, row_n, row_o)
 											if mayor = 1 then
 												set_evil_position_right (i, j)
-												j := 5
-												l := 5
-												n := 5
-												o := 5
+												j := 4
+												l := 4
+												n := 4
+												o := 4
 											else
 												if mayor = 2 then
 													set_evil_position_left (k, l)
-													j := 5
-													l := 5
-													n := 5
-													o := 5
+													j := 4
+													l := 4
+													n := 4
+													o := 4
 												else
 													if mayor = 3 then
 														set_evil_position_left (m, n)
-														j := 5
-														l := 5
-														n := 5
-														o := 5
+														j := 4
+														l := 4
+														n := 4
+														o := 4
 													else
 														if mayor = 4 then
 															set_evil_position_left (p, o)
-															j := 5
-															l := 5
-															n := 5
-															o := 5
+															j := 4
+															l := 4
+															n := 4
+															o := 4
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
@@ -756,50 +756,50 @@ feature {NONE} -- Auxiliary routines
 			from
 				j := 4
 			until
-				j <= 1
+				j = 1
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					j := j - 1
 				else
+					if j < 1 then
+						row_j := board.elements.item (i, j+1).value
+					else
+						row_j := board.elements.item (i, j).value
+					end
 					from
 						l := 4
 					until
-						l <= 1
+						l = 1
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							l := l - 1
 						else
+							if l < 1 then
+								row_l := board.elements.item (k, l+1).value
+							else
+								row_l := board.elements.item (k, l).value
+							end
 							from
 								n := 4
 							until
-								n <= 1
+								n = 1
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									n := n - 1
 								else
+									if n < 1 then
+										row_n := board.elements.item (m, n+1).value
+									else
+										row_n := board.elements.item (m, n).value
+									end
 									from
 										o := 4
 									until
-										o <= 1
+										o = 1
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											o := o - 1
 										else
-											if j < 4 then
-												row_j := board.elements.item (i, j+1).value
-											else
-												row_j := board.elements.item (i, j).value
-											end
-											if l < 4 then
-												row_l := board.elements.item (k, l+1).value
-											else
-												row_l := board.elements.item (k, l).value
-											end
-											if n < 4 then
-												row_n := board.elements.item (m, n+1).value
-											else
-												row_n := board.elements.item (m, n).value
-											end
 											if o < 4 then
 												row_o := board.elements.item (p, o+1).value
 											else
@@ -808,31 +808,31 @@ feature {NONE} -- Auxiliary routines
 											mayor := is_mayor (row_j, row_l, row_n, row_o)
 											if mayor = 1 then
 												set_evil_position_left (i, j)
-												j := 0
-												l := 0
-												n := 0
-												o := 0
+												j := 1
+												l := 1
+												n := 1
+												o := 1
 											else
 												if mayor = 2 then
 													set_evil_position_left (k, l)
-													j := 0
-													l := 0
-													n := 0
-													o := 0
+													j := 1
+													l := 1
+													n := 1
+													o := 1
 												else
 													if mayor = 3 then
 														set_evil_position_right (m, n)
-														j := 0
-														l := 0
-														n := 0
-														o := 0
+														j := 1
+														l := 1
+														n := 1
+														o := 1
 													else
 														if mayor = 4 then
 															set_evil_position_right (p, o)
-															j := 0
-															l := 0
-															n := 0
-															o := 0
+															j := 1
+															l := 1
+															n := 1
+															o := 1
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
