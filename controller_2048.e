@@ -148,7 +148,7 @@ feature -- Movement commands
 				end --end loop i
 				j := j + 1
 			end --end loop j
-			set_random_free_cell
+			set_free_cell_up
 		end --end do
 
 	down -- Moves the cells to the lowermost possible point of the game board.
@@ -219,7 +219,7 @@ feature -- Movement commands
 				end -- end loop j
 				i := i + 1;
 			end -- end loop i
-			set_random_free_cell
+			set_free_cell_down
 		end -- end do
 
 	left
@@ -291,7 +291,7 @@ feature -- Movement commands
 				end --end loop j
 				i := i + 1
 			end --end loop i
-			set_random_free_cell
+			set_free_cell_left
 		end --end do	
 
 	right
@@ -361,7 +361,7 @@ feature -- Movement commands
 				end --end loop j
 				i := i + 1
 			end --end loop i
-			set_random_free_cell
+			set_free_cell_right
 		end --end do
 
 feature {NONE} -- Auxiliary routines
@@ -436,7 +436,7 @@ feature {NONE} -- Auxiliary routines
 			from
 				i := 1
 			until
-				i > 4
+				i >= 4
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					i := i + 1
@@ -444,7 +444,7 @@ feature {NONE} -- Auxiliary routines
 					from
 						k := 1
 					until
-						k > 4
+						k >= 4
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							k := k + 1
@@ -452,7 +452,7 @@ feature {NONE} -- Auxiliary routines
 							from
 								m := 1
 							until
-								m > 4
+								m >= 4
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									m := m + 1
@@ -460,7 +460,7 @@ feature {NONE} -- Auxiliary routines
 									from
 										p := 1
 									until
-										p > 4
+										p >= 4
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											p := p + 1
@@ -541,7 +541,7 @@ feature {NONE} -- Auxiliary routines
 			from
 				i := 4
 			until
-				i < 1
+				i <= 1
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					i := i - 1
@@ -549,7 +549,7 @@ feature {NONE} -- Auxiliary routines
 					from
 						k := 4
 					until
-						k < 1
+						k <= 1
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							k := k - 1
@@ -557,7 +557,7 @@ feature {NONE} -- Auxiliary routines
 							from
 								m := 4
 							until
-								m < 1
+								m <= 1
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									m := m - 1
@@ -565,7 +565,7 @@ feature {NONE} -- Auxiliary routines
 									from
 										p := 4
 									until
-										p < 1
+										p <= 1
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											p := p - 1
@@ -649,7 +649,7 @@ feature {NONE} -- Auxiliary routines
 			from
 				j := 1
 			until
-				j > 4
+				j >= 4
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					j := j + 1
@@ -657,7 +657,7 @@ feature {NONE} -- Auxiliary routines
 					from
 						l := 1
 					until
-						l > 4
+						l >= 4
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							l := l + 1
@@ -665,7 +665,7 @@ feature {NONE} -- Auxiliary routines
 							from
 								n := 1
 							until
-								n > 4
+								n >= 4
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									n := n + 1
@@ -673,7 +673,7 @@ feature {NONE} -- Auxiliary routines
 									from
 										o := 1
 									until
-										o > 4
+										o >= 4
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											o := o + 1
@@ -756,7 +756,7 @@ feature {NONE} -- Auxiliary routines
 			from
 				j := 4
 			until
-				j < 1
+				j <= 1
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					j := j - 1
@@ -764,7 +764,7 @@ feature {NONE} -- Auxiliary routines
 					from
 						l := 4
 					until
-						l < 1
+						l <= 1
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							l := l - 1
@@ -772,7 +772,7 @@ feature {NONE} -- Auxiliary routines
 							from
 								n := 4
 							until
-								n < 1
+								n <= 1
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									n := n - 1
@@ -780,7 +780,7 @@ feature {NONE} -- Auxiliary routines
 									from
 										o := 4
 									until
-										o < 1
+										o <= 1
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											o := o - 1

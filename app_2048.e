@@ -256,12 +256,12 @@ feature {NONE} -- Execution
 				  	end
 				end
 				-- Load Game
-				if (attached req.string_item ("load_user") as load_user) and (attached req.string_item ("load_pass") as load_pass) then
+				if (attached req.string_item ("load_user") as load_user) and (attached req.string_item ("load_pass") as load_pass) and (attached req.string_item ("load_game") as load_game) then
 					user.load_game
 					create controller.make_with_board (user.game)
 				end
 				-- Save Game and Quit
-				if (attached req.string_item ("save_user") as save_user) and (attached req.string_item ("save_pass") as save_pass)then
+				if (attached req.string_item ("save_user") as save_user) and (attached req.string_item ("save_pass") as save_pass) and (attached req.string_item ("save_quit") as save_quit) then
 					user.save_game (controller.board)
 					option_pantal := 0 --Initial Pantal
 					Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
@@ -278,13 +278,17 @@ feature {NONE} -- Execution
 			if option_pantal = 4 then --Win Game Pantal
 				option_pantal := 0 --Initial Pantal
 				Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
-					<a>WIN GAME!!!<a>
+							<form action="/" method="POST">
+								<input style="background-color: #0B0B61" type="submit" name="game_over" value="GAME OVER!!!" style=width:100px;height:50px/>
+							</form>
 					]" + "</div>")
 			end
 			if option_pantal = 5 then --Game Over Pantal
 				option_pantal := 0 --Initial Pantal
    				Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
-					<a>GAME OVER!!!<a>
+							<form action="/" method="POST">
+								<input style="background-color: #0B0B61" type="submit" name="win_game" value="WIN GAME!!!" style=width:100px;height:50px/>
+							</form>
 					]" + "</div>")
 			end
 		end
