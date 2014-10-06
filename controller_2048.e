@@ -428,15 +428,20 @@ feature {NONE} -- Auxiliary routines
 			i, j, k, l, m, n, o, p : INTEGER
 			col_i, col_k, col_m, col_p: INTEGER
 			mayor : INTEGER
+			col1_elem, col2_elem, col3_elem, col4_elem: BOOLEAN
 		do
 			j := 1
 			l := 2
 			n := 3
 			o := 4
+			col1_elem := false
+			col2_elem := false
+			col3_elem := false
+			col4_elem := false
 			from
 				i := 1
 			until
-				i = 4
+				i = 4 or col1_elem
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					i := i + 1
@@ -446,10 +451,11 @@ feature {NONE} -- Auxiliary routines
 					else
 						col_i := board.elements.item (i, j).value
 					end
+					col1_elem := true
 					from
 						k := 1
 					until
-						k = 4
+						k = 4 or col2_elem
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							k := k + 1
@@ -459,10 +465,11 @@ feature {NONE} -- Auxiliary routines
 							else
 								col_k := board.elements.item (k, l).value
 							end
+							col2_elem := true
 							from
 								m := 1
 							until
-								m = 4
+								m = 4 or col3_elem
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									m := m + 1
@@ -472,10 +479,11 @@ feature {NONE} -- Auxiliary routines
 									else
 										col_m := board.elements.item (m, n).value
 									end
+									col3_elem := true
 									from
 										p := 1
 									until
-										p = 4
+										p = 4 or col4_elem
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											p := p + 1
@@ -485,34 +493,19 @@ feature {NONE} -- Auxiliary routines
 											else
 												col_p := board.elements.item (p, o).value
 											end
+											col3_elem := true
 											mayor := is_mayor (col_i, col_k, col_m, col_p)
 											if mayor = 1 then
 												set_evil_position_up (i, j)
-												i := 4
-												k := 4
-												m := 4
-												p := 4
 											else
 												if mayor = 2 then
 													set_evil_position_up (k, l)
-													i := 4
-													k := 4
-													m := 4
-													p := 4
 												else
 													if mayor = 3 then
 														set_evil_position_up (m, n)
-														i := 4
-														k := 4
-														m := 4
-														p := 4
 													else
 														if mayor = 4 then
 															set_evil_position_up (p, o)
-															i := 4
-															k := 4
-															m := 4
-															p := 4
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
@@ -533,91 +526,84 @@ feature {NONE} -- Auxiliary routines
 			i, j, k, l, m, n, o, p : INTEGER
 			col_i, col_k, col_m, col_p: INTEGER
 			mayor : INTEGER
+			col1_elem, col2_elem, col3_elem, col4_elem: BOOLEAN
 		do
 			j := 1
 			l := 2
 			n := 3
 			o := 4
+			col1_elem := false
+			col2_elem := false
+			col3_elem := false
+			col4_elem := false
 			from
 				i := 4
 			until
-				i = 1
+				i = 1 or col1_elem
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					i := i - 1
 				else
-					if i < 1 then
+					if i < 4 then
 						col_i := board.elements.item (i+1, j).value
 					else
 						col_i := board.elements.item (i, j).value
 					end
+					col1_elem := true
 					from
 						k := 4
 					until
-						k = 1
+						k = 1 or col2_elem
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							k := k - 1
 						else
-							if k < 1 then
+							if k < 4 then
 								col_k := board.elements.item (k+1, l).value
 							else
 								col_k := board.elements.item (k, l).value
 							end
+							col2_elem := true
 							from
 								m := 4
 							until
-								m = 1
+								m = 1 or col3_elem
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									m := m - 1
 								else
-     								if m < 1 then
+     								if m < 4 then
 										col_m := board.elements.item (m+1, n).value
 									else
 										col_m := board.elements.item (m, n).value
 									end
+									col3_elem := true
 									from
 										p := 4
 									until
-										p = 1
+										p = 1 or col4_elem
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											p := p - 1
 										else
-											if p < 1 then
+											if p < 4 then
 												col_p := board.elements.item (p+1, o).value
 											else
 												col_p := board.elements.item (p, o).value
 											end
+											col4_elem := true
 											mayor := is_mayor (col_i, col_k, col_m, col_p)
 											if mayor = 1 then
 												set_evil_position_down (i, j)
-												i := 1
-												k := 1
-												m := 1
-												p := 1
 											else
 												if mayor = 2 then
 													set_evil_position_down (k, l)
-													i := 1
-													k := 1
-													m := 1
-													p := 1
 												else
 													if mayor = 3 then
 														set_evil_position_down (m, n)
-														i := 1
-														k := 1
-														m := 1
-														p := 1
 													else
 														if mayor = 4 then
 															set_evil_position_down (p, o)
-															i := 1
-															k := 1
-															m := 1
-															p := 1
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
@@ -639,6 +625,7 @@ feature {NONE} -- Auxiliary routines
 			i, j, k, l, m, n, o, p : INTEGER
 			row_j, row_l, row_n, row_o: INTEGER
 			mayor : INTEGER
+			col1_elem, col2_elem, col3_elem, col4_elem: BOOLEAN
 		do
 		-- Dejamos fija fila y vamos variando la columna para recorrer el tablero y asi
 		-- encontrar las ultimas posiciones filled de cada fila.
@@ -646,49 +633,56 @@ feature {NONE} -- Auxiliary routines
 			k := 2
 			m := 3
 			p := 4
+			col1_elem := false
+			col2_elem := false
+			col3_elem := false
+			col4_elem := false
 			from
 				j := 1
 			until
-				j = 4
+				j = 4 or col1_elem
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					j := j + 1
 				else
-					if j > 4 then
+					if j > 1 then
 						row_j := board.elements.item (i, j-1).value
 					else
 						row_j := board.elements.item (i, j).value
 					end
+					col1_elem := true
 					from
 						l := 1
 					until
-						l = 4
+						l = 4 or col2_elem
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							l := l + 1
 						else
-							if l > 4 then
+							if l > 1 then
 								row_l := board.elements.item (k, l-1).value
 							else
 								row_l := board.elements.item (k, l).value
 							end
+							col2_elem := true
 							from
 								n := 1
 							until
-								n = 4
+								n = 4 or col3_elem
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									n := n + 1
 								else
-									if n > 4 then
+									if n > 1 then
 										row_n := board.elements.item (m, n-1).value
 									else
 										row_n := board.elements.item (m, n).value
 									end
+									col3_elem := true
 									from
 										o := 1
 									until
-										o = 4
+										o = 4 or col4_elem
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											o := o + 1
@@ -698,34 +692,19 @@ feature {NONE} -- Auxiliary routines
 											else
 												row_o := board.elements.item (p, o).value
 											end
+											col4_elem := true
 											mayor := is_mayor (row_j, row_l, row_n, row_o)
 											if mayor = 1 then
 												set_evil_position_right (i, j)
-												j := 4
-												l := 4
-												n := 4
-												o := 4
 											else
 												if mayor = 2 then
 													set_evil_position_left (k, l)
-													j := 4
-													l := 4
-													n := 4
-													o := 4
 												else
 													if mayor = 3 then
 														set_evil_position_left (m, n)
-														j := 4
-														l := 4
-														n := 4
-														o := 4
 													else
 														if mayor = 4 then
 															set_evil_position_left (p, o)
-															j := 4
-															l := 4
-															n := 4
-															o := 4
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
@@ -746,6 +725,7 @@ feature {NONE} -- Auxiliary routines
 			i, j, k, l, m, n, o, p : INTEGER
 			row_j, row_l, row_n, row_o: INTEGER
 			mayor : INTEGER
+			col1_elem, col2_elem, col3_elem, col4_elem: BOOLEAN
 		do
 		-- Dejamos fija fila y vamos variando la columna para recorrer el tablero y asi
 		-- encontrar las ultimas posiciones filled de cada fila.
@@ -753,49 +733,56 @@ feature {NONE} -- Auxiliary routines
 			k := 2
 			m := 3
 			p := 4
+			col1_elem := false
+			col2_elem := false
+			col3_elem := false
+			col4_elem := false
 			from
 				j := 4
 			until
-				j = 1
+				j = 1 or col1_elem
 			loop
 				if board.elements.item (i, j).value /= 0 then
 					j := j - 1
 				else
-					if j < 1 then
+					if j < 4 then
 						row_j := board.elements.item (i, j+1).value
 					else
 						row_j := board.elements.item (i, j).value
 					end
+					col1_elem := true
 					from
 						l := 4
 					until
-						l = 1
+						l = 1 or col2_elem
 					loop
 						if board.elements.item (k, l).value /= 0 then
 							l := l - 1
 						else
-							if l < 1 then
+							if l < 4 then
 								row_l := board.elements.item (k, l+1).value
 							else
 								row_l := board.elements.item (k, l).value
 							end
+							col2_elem := true
 							from
 								n := 4
 							until
-								n = 1
+								n = 1 or col3_elem
 							loop
 								if board.elements.item (m, n).value /= 0 then
 									n := n - 1
 								else
-									if n < 1 then
+									if n < 4 then
 										row_n := board.elements.item (m, n+1).value
 									else
 										row_n := board.elements.item (m, n).value
 									end
+									col3_elem := true
 									from
 										o := 4
 									until
-										o = 1
+										o = 1 or col4_elem
 									loop
 										if board.elements.item (p, o).value /= 0 then
 											o := o - 1
@@ -805,34 +792,19 @@ feature {NONE} -- Auxiliary routines
 											else
 												row_o := board.elements.item (p, o).value
 											end
+											col4_elem := true
 											mayor := is_mayor (row_j, row_l, row_n, row_o)
 											if mayor = 1 then
 												set_evil_position_left (i, j)
-												j := 1
-												l := 1
-												n := 1
-												o := 1
 											else
 												if mayor = 2 then
 													set_evil_position_left (k, l)
-													j := 1
-													l := 1
-													n := 1
-													o := 1
 												else
 													if mayor = 3 then
 														set_evil_position_right (m, n)
-														j := 1
-														l := 1
-														n := 1
-														o := 1
 													else
 														if mayor = 4 then
 															set_evil_position_right (p, o)
-															j := 1
-															l := 1
-															n := 1
-															o := 1
 														end -- end mayor = 4
 													end -- end mayor = 3
 												end	-- end mayor = 2
