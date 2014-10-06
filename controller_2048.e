@@ -1,7 +1,7 @@
 note
 	description: "This class takes care of the control of the game."
 	author: ""
-	date: "August 25, 2014"
+	date: "October 4, 2014"
 	revision: "0.01"
 
 class
@@ -148,7 +148,7 @@ feature -- Movement commands
 				end --end loop i
 				j := j + 1
 			end --end loop j
-			set_free_cell_up
+			set_random_free_cell
 		end --end do
 
 	down -- Moves the cells to the lowermost possible point of the game board.
@@ -219,7 +219,7 @@ feature -- Movement commands
 				end -- end loop j
 				i := i + 1;
 			end -- end loop i
-			set_free_cell_down
+			set_random_free_cell
 		end -- end do
 
 	left
@@ -291,7 +291,7 @@ feature -- Movement commands
 				end --end loop j
 				i := i + 1
 			end --end loop i
-			set_free_cell_left
+			set_random_free_cell
 		end --end do	
 
 	right
@@ -361,7 +361,7 @@ feature -- Movement commands
 				end --end loop j
 				i := i + 1
 			end --end loop i
-			set_free_cell_right
+			set_random_free_cell
 		end --end do
 
 feature {NONE} -- Auxiliary routines
@@ -386,6 +386,17 @@ feature {NONE} -- Auxiliary routines
 			end --end loop
 		end --end do
 
+	random_number_two_or_four (random_sequence: RANDOM): INTEGER
+			-- Randomly returns two or four
+		local
+			random_number: INTEGER
+		do
+			random_number := (get_random (random_sequence, 2) + 1) * 2
+			Result := random_number
+		ensure
+			Result = 2 or Result = 4
+		end
+
 	get_random_seed: INTEGER
 			-- Returns a seed for random sequences
 		local
@@ -409,17 +420,6 @@ feature {NONE} -- Auxiliary routines
 			Result := random_sequence.item \\ ceil;
 		ensure
 			Result < ceil
-		end
-
-	random_number_two_or_four (random_sequence: RANDOM): INTEGER
-			-- Randomly returns two or four
-		local
-			random_number: INTEGER
-		do
-			random_number := (get_random (random_sequence, 2) + 1) * 2
-			Result := random_number
-		ensure
-			Result = 2 or Result = 4
 		end
 
 	set_free_cell_up
@@ -960,10 +960,9 @@ feature {NONE} -- Auxiliary routines
 		        end
 		    end
 				--initialize random seed
-		end -- end do	
+		end -- end do		
 
-feature {SET_RANDOM_FREE_CELL_AT_CONTROLLER}
-
+Feature {SET_RANDOM_FREE_CELL_AT_CONTROLLER}
 	set_random_free_cell
 		require
 			not board.is_full
