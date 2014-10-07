@@ -82,11 +82,11 @@ Playing
 Documentation
 -------------
 
-[gabriele]: http://gabrielecirulli.com
-[2048]: http://git.io/2048
-[alpha-release]: https://github.com/nmaguirre/eiffel-2048/releases
-[Design-by-contract]: http://en.wikipedia.org/wiki/Design_by_contract
-[TDD]: http://en.wikipedia.org/wiki/Test-driven_development
-[BDD]: http://en.wikipedia.org/wiki/Behavior-driven_development
-[Eiffel]: https://docs.eiffel.com
-[Version Evil]: https://github.com/nico88/eiffel-2048
+- Version Evil: https://github.com/nico88/eiffel-2048
+- gabriele: http://gabrielecirulli.com
+- 2048: http://git.io/2048
+- alpha-release: https://github.com/nmaguirre/eiffel-2048/releases
+- Design-by-contract: http://en.wikipedia.org/wiki/Design_by_contract
+- TDD: http://en.wikipedia.org/wiki/Test-driven_development
+- BDD: http://en.wikipedia.org/wiki/Behavior-driven_development
+- Eiffel: https://docs.eiffel.com

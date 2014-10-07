@@ -1,7 +1,7 @@
 note
 	description: "This class takes care of the control of the game."
 	author: ""
-	date: "August 25, 2014"
+	date: "October 4, 2014"
 	revision: "0.01"
 
 class
@@ -148,7 +148,7 @@ feature -- Movement commands
 				end --end loop i
 				j := j + 1
 			end --end loop j
-			set_random_free_cell
+			set_free_cell_up
 		end --end do
 
 	down -- Moves the cells to the lowermost possible point of the game board.
@@ -219,7 +219,7 @@ feature -- Movement commands
 				end -- end loop j
 				i := i + 1;
 			end -- end loop i
-			set_random_free_cell
+			set_free_cell_down
 		end -- end do
 
 	left
@@ -291,7 +291,7 @@ feature -- Movement commands
 				end --end loop j
 				i := i + 1
 			end --end loop i
-			set_random_free_cell
+			set_free_cell_left
 		end --end do	
 
 	right
@@ -361,7 +361,7 @@ feature -- Movement commands
 				end --end loop j
 				i := i + 1
 			end --end loop i
-			set_random_free_cell
+			set_free_cell_right
 		end --end do
 
 feature {NONE} -- Auxiliary routines
@@ -422,8 +422,559 @@ feature {NONE} -- Auxiliary routines
 			Result < ceil
 		end
 
-Feature {SET_RANDOM_FREE_CELL_AT_CONTROLLER}
-set_random_free_cell
+	set_free_cell_up
+
+		local
+			i, k, m, o : INTEGER
+			row_1, row_2, row_3, row_4 : INTEGER
+			elem_1, elem_2, elem_3, elem_4 : INTEGER
+			mayor : INTEGER
+		do
+		    elem_1 := 0
+		    elem_2 := 0
+		    elem_3 := 0
+		    elem_4 := 0
+		    row_1 := 1
+		    row_2 := 1
+		    row_3 := 1
+		    row_4 := 1
+			from --Busco el proximo elemento igual a 0 de la columna 1, guardo su numero de fila y su antecesor para la comparacion
+				i := 1
+			until
+				i > 4
+			loop
+				if board.elements.item (i, 1).value /= 0 then
+					i := i + 1
+				else
+					if i > 1 then
+						elem_1 := board.elements.item (i - 1, 1).value
+					else
+						elem_1 := board.elements.item (i, 1).value
+					end
+					row_1 := i
+					i := 5
+				end
+			end --end loop i	
+			from --Busco el proximo elemento igual a 0 de la columna 2, guardo su numero de fila y su antecesor para la comparacion
+				k := 1
+			until
+				k > 4
+			loop
+				if board.elements.item (k, 2).value /= 0 then
+					k := k + 1
+				else
+					if k > 1 then
+						elem_2 := board.elements.item (k - 1, 2).value
+					else
+						elem_2 := board.elements.item (k, 2).value
+					end
+					row_2 := k
+					k := 5
+				end
+			end --end loop k	
+			from --Busco el proximo elemento igual a 0 de la columna 3, guardo su numero de fila y su antecesor para la comparacion
+				m := 1
+			until
+				m > 4
+			loop
+				if board.elements.item (m, 3).value /= 0 then
+					m := m + 1
+				else
+					if m > 1 then
+						elem_3 := board.elements.item (m - 1, 3).value
+					else
+						elem_3 := board.elements.item (m, 3).value
+					end
+					row_3 := m
+					m := 5
+				end
+			end --end loop m	
+			from --Busco el proximo elemento igual a 0 de la columna 4, guardo su numero de fila y su antecesor para la comparacion
+				o := 1
+			until
+				o > 4
+			loop
+				if board.elements.item (o, 4).value /= 0 then
+					o := o + 1
+				else
+					if o > 1 then
+						elem_4 := board.elements.item (o - 1, 4).value
+					else
+						elem_4 := board.elements.item (o, 4).value
+					end
+					row_4 := o
+					o := 5
+				end
+			end --end loop m	
+			mayor := is_mayor (elem_1, elem_2, elem_3, elem_4)
+			if mayor = 1 then
+			  	set_evil_position_up (row_1, 1)
+			else
+				if mayor = 2 then
+					set_evil_position_up (row_2, 2)
+				else
+					if mayor = 3 then
+						set_evil_position_up (row_3, 3)
+					else
+						if mayor = 4 then
+							set_evil_position_up (row_4, 4)
+						end -- end 4
+					end -- end 3
+				end --end 2
+			end	--end 1			
+		end --end do
+
+	set_free_cell_down
+
+		local
+			i, k, m, o : INTEGER
+			row_1, row_2, row_3, row_4 : INTEGER
+			elem_1, elem_2, elem_3, elem_4 : INTEGER
+			mayor : INTEGER
+		do
+		    elem_1 := 0
+		    elem_2 := 0
+		    elem_3 := 0
+		    elem_4 := 0
+		    row_1 := 4
+		    row_2 := 4
+		    row_3 := 4
+		    row_4 := 4
+			from --Busco el proximo elemento igual a 0 de la columna 1, guardo su numero de fila y su antecesor para la comparacion
+				i := 4
+			until
+				i < 1
+			loop
+				if board.elements.item (i, 1).value /= 0 then
+					i := i - 1
+				else
+					if i < 4 then
+						elem_1 := board.elements.item (i + 1, 1).value
+					else
+						elem_1 := board.elements.item (i, 1).value
+					end
+					row_1 := i
+					i := 0
+				end
+			end --end loop i	
+			from --Busco el proximo elemento igual a 0 de la columna 2, guardo su numero de fila y su antecesor para la comparacion
+				k := 4
+			until
+				k < 1
+			loop
+				if board.elements.item (k, 2).value /= 0 then
+					k := k - 1
+				else
+					if k < 4 then
+						elem_2 := board.elements.item (k + 1, 2).value
+					else
+						elem_2 := board.elements.item (k, 2).value
+					end
+					row_2 := k
+					k := 0
+				end
+			end --end loop k
+			from --Busco el proximo elemento igual a 0 de la columna 3, guardo su numero de fila y su antecesor para la comparacion
+				m := 4
+			until
+				m < 1
+			loop
+				if board.elements.item (m, 3).value /= 0 then
+					m := m - 1
+				else
+					if m < 4 then
+						elem_3 := board.elements.item (m + 1, 3).value
+					else
+						elem_3 := board.elements.item (m, 3).value
+					end
+					row_3 := m
+					m := 0
+				end
+			end --end loop m
+			from --Busco el proximo elemento igual a 0 de la columna 4, guardo su numero de fila y su antecesor para la comparacion
+				o := 4
+			until
+				o < 1
+			loop
+				if board.elements.item (o, 4).value /= 0 then
+					o := o - 1
+				else
+					if o < 4 then
+						elem_4 := board.elements.item (o + 1, 4).value
+					else
+						elem_4 := board.elements.item (o, 4).value
+					end
+					row_4 := o
+					o := 0
+				end
+			end --end loop o
+			mayor := is_mayor (elem_1, elem_2, elem_3, elem_4)
+			if mayor = 1 then
+			  	set_evil_position_down (row_1, 1)
+			else
+				if mayor = 2 then
+					set_evil_position_down (row_2, 2)
+				else
+					if mayor = 3 then
+						set_evil_position_down (row_3, 3)
+					else
+						if mayor = 4 then
+							set_evil_position_down (row_4, 4)
+						end -- end 4
+					end -- end 3
+				end --end 2
+			end	--end 1			
+		end --end do		
+
+	set_free_cell_left
+
+		local
+			j, l, n, p : INTEGER
+			col_1, col_2, col_3, col_4 : INTEGER
+			elem_1, elem_2, elem_3, elem_4 : INTEGER
+			mayor : INTEGER
+		do
+		    elem_1 := 0
+		    elem_2 := 0
+		    elem_3 := 0
+		    elem_4 := 0
+		    col_1 := 1
+		    col_2 := 1
+		    col_3 := 1
+		    col_4 := 1
+			from --Busco el proximo elemento igual a 0 de la fila 1, guardo su numero de columna y su antecesor para la comparacion
+				j := 1
+			until
+				j > 4
+			loop
+				if board.elements.item (1, j).value /= 0 then
+					j := j + 1
+				else
+					if j > 1 then
+						elem_1 := board.elements.item (1, j - 1).value
+					else
+						elem_1 := board.elements.item (1, j).value
+					end
+					col_1 := j
+					j := 5
+				end
+			end --end loop j	
+			from --Busco el proximo elemento igual a 0 de la fila 2, guardo su numero de columna y su antecesor para la comparacion
+				l := 1
+			until
+				l > 4
+			loop
+				if board.elements.item (2, l).value /= 0 then
+					l := l + 1
+				else
+					if l > 1 then
+						elem_2 := board.elements.item (2, l - 1).value
+					else
+						elem_2 := board.elements.item (2, l).value
+					end
+					col_2 := l
+					l := 5
+				end
+			end --end loop l
+			from --Busco el proximo elemento igual a 0 de la fila 3, guardo su numero de columna y su antecesor para la comparacion
+				n := 1
+			until
+				n > 4
+			loop
+				if board.elements.item (3, n).value /= 0 then
+					n := n + 1
+				else
+					if n > 1 then
+						elem_3 := board.elements.item (3, n - 1).value
+					else
+						elem_3 := board.elements.item (3, n).value
+					end
+					col_3 := n
+					n := 5
+				end
+			end --end loop n
+			from --Busco el proximo elemento igual a 0 de la fila 4, guardo su numero de columna y su antecesor para la comparacion
+				p := 1
+			until
+				p > 4
+			loop
+				if board.elements.item (4, p).value /= 0 then
+					p := p + 1
+				else
+					if p > 1 then
+						elem_4 := board.elements.item (4, p - 1).value
+					else
+						elem_4 := board.elements.item (4, p).value
+					end
+					col_4 := p
+					p := 5
+				end
+			end --end loop p
+			mayor := is_mayor (elem_1, elem_2, elem_3, elem_4)
+			if mayor = 1 then
+			  	set_evil_position_left (1, col_1)
+			else
+				if mayor = 2 then
+					set_evil_position_left (2, col_2)
+				else
+					if mayor = 3 then
+						set_evil_position_left (3, col_3)
+					else
+						if mayor = 4 then
+							set_evil_position_left (4, col_4)
+						end -- end 4
+					end -- end 3
+				end --end 2
+			end	--end 1	
+		end --end do			
+
+	set_free_cell_right
+
+		local
+			j, l, n, p : INTEGER
+			col_1, col_2, col_3, col_4 : INTEGER
+			elem_1, elem_2, elem_3, elem_4 : INTEGER
+			mayor : INTEGER
+		do
+		    elem_1 := 0
+		    elem_2 := 0
+		    elem_3 := 0
+		    elem_4 := 0
+		    col_1 := 4
+		    col_2 := 4
+		    col_3 := 4
+		    col_4 := 4
+			from --Busco el proximo elemento igual a 0 de la fila 1, guardo su numero de columna y su antecesor para la comparacion
+				j := 4
+			until
+				j < 1
+			loop
+				if board.elements.item (1, j).value /= 0 then
+					j := j - 1
+				else
+					if j < 4 then
+						elem_1 := board.elements.item (1, j + 1).value
+					else
+						elem_1 := board.elements.item (1, j).value
+					end
+					col_1 := j
+					j := 0
+				end
+			end --end loop j	
+			from --Busco el proximo elemento igual a 0 de la fila 2, guardo su numero de columna y su antecesor para la comparacion
+				l := 4
+			until
+				l < 1
+			loop
+				if board.elements.item (2, l).value /= 0 then
+					l := l - 1
+				else
+					if l < 4 then
+						elem_2 := board.elements.item (2, l + 1).value
+					else
+						elem_2 := board.elements.item (2, l).value
+					end
+					col_2 := l
+					l := 0
+				end
+			end --end loop l
+			from --Busco el proximo elemento igual a 0 de la fila 3, guardo su numero de columna y su antecesor para la comparacion
+				n := 4
+			until
+				n < 1
+			loop
+				if board.elements.item (3, n).value /= 0 then
+					n := n - 1
+				else
+					if n < 4 then
+						elem_3 := board.elements.item (3, n + 1).value
+					else
+						elem_3 := board.elements.item (3, n).value
+					end
+					col_3 := n
+					n := 0
+				end
+			end --end loop n
+			from --Busco el proximo elemento igual a 0 de la fila 4, guardo su numero de columna y su antecesor para la comparacion
+				p := 4
+			until
+				p < 1
+			loop
+				if board.elements.item (4, p).value /= 0 then
+					p := p - 1
+				else
+					if p < 4 then
+						elem_4 := board.elements.item (4, p + 1).value
+					else
+						elem_4 := board.elements.item (4, p).value
+					end
+					col_4 := p
+					p := 0
+				end
+			end --end loop p
+			mayor := is_mayor (elem_1, elem_2, elem_3, elem_4)
+			if mayor = 1 then
+			  	set_evil_position_right (1, col_1)
+			else
+				if mayor = 2 then
+					set_evil_position_right (2, col_2)
+				else
+					if mayor = 3 then
+						set_evil_position_right (3, col_3)
+					else
+						if mayor = 4 then
+							set_evil_position_right (4, col_4)
+						end -- end 4
+					end -- end 3
+				end --end 2
+			end	--end 1	
+		end --end do			
+
+	is_mayor (j,l,n,o: INTEGER): INTEGER
+
+	do
+		if j >= l then
+			if j >= n then
+				if j >= o then
+					Result := 1
+				else
+					Result := 4
+				end
+			else
+				if n >= o then
+					Result := 3
+				else
+					Result := 4
+				end
+			end
+		else
+			if l >= n then
+				if l >= o then
+					Result := 2
+				else
+					Result := 4
+				end
+			else
+				if n >= o then
+					Result := 3
+				else
+					Result := 4
+				end
+			end
+		end
+
+	end --end do	
+
+	set_evil_position_up (row, column: INTEGER)
+
+		local
+			random_sequence: RANDOM
+		do
+			if row = 1 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+			    if board.elements.item (row-1, column).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+		    	    if board.elements.item (row-1, column).value = 4 then
+		        		board.set_cell (row, column, 2)
+		        	else
+						create random_sequence.set_seed (get_random_seed)
+					-- set at cell random number	
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+					end
+		        end
+		    end
+				--initialize random seed
+		end -- end do
+
+	set_evil_position_down (row, column: INTEGER)
+
+		local
+			random_sequence: RANDOM
+		do
+			if row = 4 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+			    if board.elements.item (row+1, column).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+		    	    if board.elements.item (row+1, column).value = 4 then
+		        		board.set_cell (row, column, 2)
+		        	else
+						create random_sequence.set_seed (get_random_seed)
+					-- set at cell random number	
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+					end
+		        end
+		    end
+				--initialize random seed
+		end -- end do
+
+	set_evil_position_left (row, column: INTEGER)
+
+		local
+			random_sequence: RANDOM
+		do
+			if column = 1 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+		    	if board.elements.item (row, column-1).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+			        if board.elements.item (row, column-1).value = 4 then
+			        	board.set_cell (row, column, 2)
+			        else
+						create random_sequence.set_seed (get_random_seed)
+						-- set at cell random number	
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+			        end
+			    end
+					--initialize random seed
+			end
+		end -- end do
+
+	set_evil_position_right (row, column: INTEGER)
+
+		local
+			random_sequence: RANDOM
+		do
+			if column = 4 then
+				create random_sequence.set_seed (get_random_seed)
+				-- set at cell random number	
+				board.set_cell (row, column, random_number_two_or_four (random_sequence))
+				coord_last_random_cell := [row, column]
+			else
+		    	if board.elements.item (row, column+1).value = 2 then
+			        board.set_cell (row, column, 4)
+			    else
+			        if board.elements.item (row, column+1).value = 4 then
+			        	board.set_cell (row, column, 2)
+			        else
+						create random_sequence.set_seed (get_random_seed)
+						-- set at cell random number	
+						board.set_cell (row, column, random_number_two_or_four (random_sequence))
+						coord_last_random_cell := [row, column]
+			        end
+			    end
+					--initialize random seed
+			end
+		end -- end do	
+
+feature {none}
+	set_random_free_cell
 		require
 			not board.is_full
 		local
