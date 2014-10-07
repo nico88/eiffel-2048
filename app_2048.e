@@ -279,7 +279,7 @@ feature {NONE} -- Execution
 				option_pantal := 0 --Initial Pantal
 				Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
 							<form action="/" method="POST">
-								<input style="background-color: #0B0B61" type="submit" name="game_over" value="GAME OVER!!!" style=width:100px;height:50px/>
+								<input style="background-color: #0B0B61" type="submit" name="win_game" value="WIN GAME!!!" style=width:100px;height:50px/>
 							</form>
 					]" + "</div>")
 			end
@@ -287,7 +287,7 @@ feature {NONE} -- Execution
 				option_pantal := 0 --Initial Pantal
    				Result.set_body ("<div align='center' ><link rel='stylesheet' type='text/css' href='https://d6945afcf8ed7ae0f49064a6a2455cbc47151266.googledrive.com/host/0B-xNCeUqs--aLW9HRTZiNWpDdUU/main.css'>" + "[
 							<form action="/" method="POST">
-								<input style="background-color: #0B0B61" type="submit" name="win_game" value="WIN GAME!!!" style=width:100px;height:50px/>
+								<input style="background-color: #0B0B61" type="submit" name="game_over" value="GAME OVER!!!" style=width:100px;height:50px/>
 							</form>
 					]" + "</div>")
 			end
