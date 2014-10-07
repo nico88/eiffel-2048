@@ -79,6 +79,8 @@ Playing
 - To load the board as it was in the last time was saved., press "Load Game".
 - To save the board and out of your session, press "Save and Quit".
 
+Documentation
+-------------
 
 [gabriele]: http://gabrielecirulli.com
 [2048]: http://git.io/2048
