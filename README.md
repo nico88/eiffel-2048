@@ -17,6 +17,7 @@
 
 #USE  
 
+  -- Be in the branch 2048_evil
   -- Using EiffelStudio:
   -- File -> Open project -> Add project 
   -- Select the file "eiffel-2048.ecf" (In Action select Complile) and press Open button.
