@@ -1,5 +1,5 @@
-Eiffel-2048
-==========
+Eiffel-2048 Evil Version
+========================
 
 Eiffel-2048 is an Eiffel implementation of the popular game 2048. The implementation is written entirely in Eiffel, using Design by Contract. It is developed in the context of a course of distributed software engineering.
 
@@ -32,6 +32,12 @@ Repository Content
   - Binaries
   - Wiki
 
+ Team 
+ ----
+
+  - Gomez, Nicolas     -- * -- github.com/nico88
+  - Morilla, Guillermo -- * -- github.com/guille85  
+
 Road Map
 =======
 
@@ -58,6 +64,7 @@ Using the provided binaries
 Using EiffelStudio
 ------------------
 
+  - Be in the branch 2048_evil
   - File -> Open project -> Add project 
   - Select the file "eiffel-2048.ecf" (In Action select Compile) and press Open button.
   - When finish the compile process you can run the program using the run button in EiffelStudio (or using the file in the folder EIFGENs\eiffel-2048\W_code).
@@ -65,11 +72,12 @@ Using EiffelStudio
 Playing
 =======
 
-- To play the game, press w, a, s, d (followed by a return) to move the tiles up, left, down and right respectively.
-- In a movement, each pair of colliding tiles with the same number will combine. Continue doing this until you get the 2048 tile or you don't have any move available.
+- To play the game, press Up, Down, Left, Right to move.
+- In a movement, each pair of colliding tiles with the same number will combine. Then insert two or four randomly chosen in the least desirable position. Continue doing this until you get the 2048 tile or you don't have any move available.
 - You win the game when you get the 2048 tile.
 - You lose the game when you can't move in any direction.
-- To quit, press q (and return) to close the application.
+- To load the board as it was in the last time was saved., press "Load Game".
+- To save the board and out of your session, press "Save and Quit".
 
 
 [gabriele]: http://gabrielecirulli.com
@@ -78,3 +86,5 @@ Playing
 [Design-by-contract]: http://en.wikipedia.org/wiki/Design_by_contract
 [TDD]: http://en.wikipedia.org/wiki/Test-driven_development
 [BDD]: http://en.wikipedia.org/wiki/Behavior-driven_development
+[Eiffel]: https://docs.eiffel.com
+[Version Evil]: https://github.com/nico88/eiffel-2048
