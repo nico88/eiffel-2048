@@ -64,7 +64,6 @@ Using the provided binaries
 Using EiffelStudio
 ------------------
 
-  - Be in the branch 2048_evil
   - File -> Open project -> Add project 
   - Select the file "eiffel-2048.ecf" (In Action select Compile) and press Open button.
   - When finish the compile process you can run the program using the run button in EiffelStudio (or using the file in the folder EIFGENs\eiffel-2048\W_code).
