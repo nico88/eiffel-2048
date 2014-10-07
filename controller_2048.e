@@ -425,7 +425,7 @@ feature {NONE} -- Auxiliary routines
 	set_free_cell_up
 
 		local
-			i, j, k, l, m, n, o, p : INTEGER
+			i, k, m, o : INTEGER
 			row_1, row_2, row_3, row_4 : INTEGER
 			elem_1, elem_2, elem_3, elem_4 : INTEGER
 			mayor : INTEGER
@@ -527,7 +527,7 @@ feature {NONE} -- Auxiliary routines
 	set_free_cell_down
 
 		local
-			i, j, k, l, m, n, o, p : INTEGER
+			i, k, m, o : INTEGER
 			row_1, row_2, row_3, row_4 : INTEGER
 			elem_1, elem_2, elem_3, elem_4 : INTEGER
 			mayor : INTEGER
@@ -629,7 +629,7 @@ feature {NONE} -- Auxiliary routines
 	set_free_cell_left
 
 		local
-			i, j, k, l, m, n, o, p : INTEGER
+			j, l, n, p : INTEGER
 			col_1, col_2, col_3, col_4 : INTEGER
 			elem_1, elem_2, elem_3, elem_4 : INTEGER
 			mayor : INTEGER
@@ -731,7 +731,7 @@ feature {NONE} -- Auxiliary routines
 	set_free_cell_right
 
 		local
-			i, j, k, l, m, n, o, p : INTEGER
+			j, l, n, p : INTEGER
 			col_1, col_2, col_3, col_4 : INTEGER
 			elem_1, elem_2, elem_3, elem_4 : INTEGER
 			mayor : INTEGER
